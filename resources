@@ -1,0 +1,175 @@
+import React, { useState } from 'react';
+import { 
+  FileText, 
+  Book, 
+  Download, 
+  Search, 
+  Globe, 
+  Layers, 
+  BarChart 
+} from 'lucide-react';
+
+const ResourceCard = ({ icon: Icon, title, description, link }) => (
+  <div className="bg-white shadow-md rounded-lg p-6 hover:shadow-lg transition-shadow">
+    <div className="flex items-center mb-4">
+      <Icon className="mr-4 text-blue-600" size={40} />
+      <h3 className="text-xl font-bold text-gray-800">{title}</h3>
+    </div>
+    <p className="text-gray-600 mb-4">{description}</p>
+    <a 
+      href={link} 
+      className="text-blue-600 hover:text-blue-800 font-semibold flex items-center"
+    >
+      Explore <Globe className="ml-2" size={16} />
+    </a>
+  </div>
+);
+
+const BlogPost = ({ title, excerpt, date, readTime }) => (
+  <div className="bg-white shadow-md rounded-lg p-6 mb-4">
+    <h3 className="text-xl font-bold text-gray-800 mb-2">{title}</h3>
+    <p className="text-gray-600 mb-4">{excerpt}</p>
+    <div className="flex justify-between text-gray-500 text-sm">
+      <span>{date}</span>
+      <span>{readTime} min read</span>
+    </div>
+  </div>
+);
+
+const DownloadableResource = ({ title, type, size, downloadLink }) => (
+  <div className="bg-white shadow-md rounded-lg p-6 flex justify-between items-center">
+    <div>
+      <h3 className="text-xl font-bold text-gray-800">{title}</h3>
+      <p className="text-gray-600">{type} | {size}</p>
+    </div>
+    <a 
+      href={downloadLink} 
+      className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center"
+    >
+      <Download className="mr-2" size={16} /> Download
+    </a>
+  </div>
+);
+
+const ResourcesPage = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const resourceSections = [
+    {
+      title: 'Resources Overview',
+      resources: [
+        {
+          icon: Book,
+          title: 'Knowledge Base',
+          description: 'Comprehensive guides and documentation for HubSpot implementation',
+          link: '#knowledge-base'
+        },
+        {
+          icon: FileText,
+          title: 'Case Studies',
+          description: 'Real-world success stories from our clients',
+          link: '#case-studies'
+        },
+        {
+          icon: BarChart,
+          title: 'Insights & Strategy',
+          description: 'Expert insights on digital transformation',
+          link: '#insights'
+        }
+      ]
+    }
+  ];
+
+  const blogPosts = [
+    {
+      title: 'Mastering HubSpot Automation',
+      excerpt: 'Unlock the full potential of marketing automation with our expert strategies...',
+      date: 'February 2024',
+      readTime: 7
+    },
+    {
+      title: 'AI-Powered CRM Strategies',
+      excerpt: 'Leverage artificial intelligence to transform your customer relationship management...',
+      date: 'January 2024',
+      readTime: 5
+    }
+  ];
+
+  const downloadableResources = [
+    {
+      title: 'HubSpot Implementation Playbook',
+      type: 'PDF Guide',
+      size: '12.5 MB',
+      downloadLink: '#download'
+    },
+    {
+      title: 'Enterprise Automation Whitepaper',
+      type: 'Research Report',
+      size: '8.2 MB',
+      downloadLink: '#download'
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-gray-100">
+      {/* Hero Section */}
+      <div className="bg-blue-600 text-white py-20 text-center">
+        <h1 className="text-4xl font-extrabold mb-6">Resources to Fuel Your Digital Transformation</h1>
+        <div className="max-w-xl mx-auto flex">
+          <input 
+            type="text" 
+            placeholder="Search resources..." 
+            className="w-full px-4 py-3 rounded-l-lg text-gray-800"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <button className="bg-white text-blue-600 px-6 py-3 rounded-r-lg">
+            <Search />
+          </button>
+        </div>
+      </div>
+
+      {/* Resources Overview */}
+      <div className="max-w-6xl mx-auto py-16 px-4">
+        <div className="grid md:grid-cols-3 gap-8">
+          {resourceSections[0].resources.map((resource, index) => (
+            <ResourceCard key={index} {...resource} />
+          ))}
+        </div>
+      </div>
+
+      {/* Blog & Insights */}
+      <div className="bg-white py-16">
+        <div className="max-w-4xl mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12">Latest Insights</h2>
+          {blogPosts.map((post, index) => (
+            <BlogPost key={index} {...post} />
+          ))}
+        </div>
+      </div>
+
+      {/* Downloadable Resources */}
+      <div className="bg-gray-100 py-16">
+        <div className="max-w-4xl mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-12">Downloadable Resources</h2>
+          <div className="space-y-6">
+            {downloadableResources.map((resource, index) => (
+              <DownloadableResource key={index} {...resource} />
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Call to Action */}
+      <div className="bg-blue-600 text-white py-16 text-center">
+        <h2 className="text-3xl font-bold mb-6">Ready to Dive Deeper?</h2>
+        <p className="text-xl mb-8">Connect with our experts for personalized insights</p>
+        <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-bold hover:bg-gray-100">
+          Schedule Consultation
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default ResourcesPage;
