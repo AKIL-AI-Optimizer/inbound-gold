@@ -1,0 +1,205 @@
+import React from 'react';
+import { 
+  Shield, 
+  Globe, 
+  Award, 
+  CheckCircle 
+} from 'lucide-react';
+
+// Brand Color Palette
+const COLORS = {
+  turquoise: '#48b6c7',
+  gold: '#ffbd59',
+  white: '#ffffff',
+  darkBlue: '#2a4b57',
+  lightGray: '#f5f5f5',
+  mediumGray: '#666666'
+};
+
+const PartnerCard = ({ logo, name, description, benefits }) => (
+  <div 
+    className="bg-white shadow-lg rounded-lg p-6"
+    style={{ borderTop: `4px solid ${COLORS.turquoise}` }}
+  >
+    <img 
+      src={logo} 
+      alt={name} 
+      className="mx-auto mb-6 max-h-24"
+    />
+    <h3 
+      className="text-xl font-bold text-center mb-4"
+      style={{ color: COLORS.darkBlue }}
+    >
+      {name}
+    </h3>
+    <p 
+      className="text-center mb-6"
+      style={{ color: COLORS.mediumGray }}
+    >
+      {description}
+    </p>
+    <ul className="space-y-3">
+      {benefits.map((benefit, index) => (
+        <li 
+          key={index} 
+          className="flex items-center"
+        >
+          <CheckCircle 
+            color={COLORS.turquoise} 
+            className="mr-3" 
+            size={20} 
+          />
+          <span 
+            className="text-mediumGray"
+            style={{ color: COLORS.darkBlue }}
+          >
+            {benefit}
+          </span>
+        </li>
+      ))}
+    </ul>
+  </div>
+);
+
+const PartnersPage = () => {
+  const partners = [
+    {
+      logo: '/api/placeholder/200/100',
+      name: 'HubSpot',
+      description: 'Elite Partner with advanced implementation expertise',
+      benefits: [
+        'Comprehensive implementation support',
+        'Advanced certification',
+        'Direct platform insights'
+      ]
+    },
+    {
+      logo: '/api/placeholder/200/100',
+      name: 'AWS',
+      description: 'Cloud infrastructure and integration specialists',
+      benefits: [
+        'Scalable cloud solutions',
+        'Enterprise-level integrations',
+        'Advanced security configurations'
+      ]
+    },
+    {
+      logo: '/api/placeholder/200/100',
+      name: 'Microsoft Azure',
+      description: 'Enterprise cloud and AI integration partners',
+      benefits: [
+        'Advanced AI capabilities',
+        'Seamless enterprise integrations',
+        'Global cloud infrastructure'
+      ]
+    }
+  ];
+
+  const partnershipBenefits = [
+    {
+      icon: Shield,
+      title: 'Certified Expertise',
+      description: 'Highest level of partner certifications'
+    },
+    {
+      icon: Globe,
+      title: 'Global Reach',
+      description: 'Comprehensive international support'
+    },
+    {
+      icon: Award,
+      title: 'Proven Excellence',
+      description: 'Recognized leaders in digital transformation'
+    }
+  ];
+
+  return (
+    <div className="min-h-screen" style={{ backgroundColor: COLORS.lightGray }}>
+      {/* Hero Section */}
+      <div 
+        className="py-20 text-center"
+        style={{ 
+          backgroundColor: COLORS.turquoise, 
+          color: COLORS.white 
+        }}
+      >
+        <h1 className="text-4xl font-extrabold mb-6">Our Strategic Partnerships</h1>
+        <p className="text-xl mb-8">Powering Digital Transformation Together</p>
+      </div>
+
+      {/* Partner Showcase */}
+      <div className="max-w-4xl mx-auto py-16 px-4">
+        <div className="grid md:grid-cols-3 gap-8">
+          {partners.map((partner, index) => (
+            <PartnerCard key={index} {...partner} />
+          ))}
+        </div>
+      </div>
+
+      {/* Partnership Benefits */}
+      <div 
+        className="py-16 text-center"
+        style={{ backgroundColor: COLORS.white }}
+      >
+        <div className="max-w-4xl mx-auto px-4">
+          <h2 
+            className="text-3xl font-bold mb-12"
+            style={{ color: COLORS.darkBlue }}
+          >
+            Why Our Partnerships Matter
+          </h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            {partnershipBenefits.map((benefit, index) => (
+              <div 
+                key={index} 
+                className="bg-white shadow-lg rounded-lg p-6"
+                style={{ borderTop: `4px solid ${COLORS.gold}` }}
+              >
+                <benefit.icon 
+                  color={COLORS.turquoise} 
+                  size={48} 
+                  className="mx-auto mb-4" 
+                />
+                <h3 
+                  className="text-xl font-bold mb-4"
+                  style={{ color: COLORS.darkBlue }}
+                >
+                  {benefit.title}
+                </h3>
+                <p 
+                  className="text-mediumGray"
+                  style={{ color: COLORS.mediumGray }}
+                >
+                  {benefit.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Call to Action */}
+      <div 
+        className="py-16 text-center"
+        style={{ 
+          backgroundColor: COLORS.turquoise, 
+          color: COLORS.white 
+        }}
+      >
+        <h2 className="text-3xl font-bold mb-6">Explore Partnership Opportunities</h2>
+        <p className="text-xl mb-8">Let's discuss how we can collaborate</p>
+        <button 
+          className="px-8 py-3 rounded-lg font-bold"
+          style={{ 
+            backgroundColor: COLORS.white, 
+            color: COLORS.turquoise 
+          }}
+        >
+          Contact Our Partnerships Team
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default PartnersPage;
