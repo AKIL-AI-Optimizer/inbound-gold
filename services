@@ -1,0 +1,191 @@
+import React, { useState } from 'react';
+import { ChevronDown, Check, DownloadCloud, Clock, Shield, Cloud } from 'lucide-react';
+
+const UseCaseCard = ({ title, painPoints, solutions, timeline, downloadLink }) => {
+  return (
+    <div className="bg-white shadow-lg rounded-lg p-6 space-y-4 border border-gray-200">
+      <h3 className="text-xl font-bold text-gray-800">{title}</h3>
+      
+      <div>
+        <h4 className="font-semibold text-gray-700 mb-2">Pain Points</h4>
+        <ul className="space-y-2">
+          {painPoints.map((point, index) => (
+            <li key={index} className="flex items-start">
+              <Check className="text-red-500 mr-2 mt-1" size={20} />
+              <span className="text-gray-600">{point}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div>
+        <h4 className="font-semibold text-gray-700 mb-2">Solutions</h4>
+        <ul className="space-y-2">
+          {solutions.map((solution, index) => (
+            <li key={index} className="flex items-start">
+              <Check className="text-green-500 mr-2 mt-1" size={20} />
+              <span className="text-gray-600">{solution}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div className="flex justify-between items-center">
+        <div>
+          <h4 className="font-semibold text-gray-700">Timeline</h4>
+          <p className="text-gray-600">{timeline}</p>
+        </div>
+        <a 
+          href={downloadLink} 
+          className="flex items-center text-blue-600 hover:text-blue-800"
+        >
+          <DownloadCloud className="mr-2" />
+          Download PDF
+        </a>
+      </div>
+    </div>
+  );
+};
+
+const ImplementationTimeline = () => {
+  const timelineSteps = [
+    { week: 'Week 1', description: 'Initial setup and discovery' },
+    { week: 'Week 2', description: 'Data migration and configuration' },
+    { week: 'Week 3', description: 'Workflow and automation setup' },
+    { week: 'Week 4', description: 'Testing and optimization' }
+  ];
+
+  return (
+    <div className="bg-white shadow-lg rounded-lg p-6">
+      <h2 className="text-2xl font-bold text-gray-800 mb-6">30-Day Implementation Roadmap</h2>
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        {timelineSteps.map((step, index) => (
+          <div key={index} className="text-center">
+            <div className="mx-auto w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+              <Clock className="text-blue-600" size={32} />
+            </div>
+            <h3 className="font-semibold text-gray-800 mb-2">{step.week}</h3>
+            <p className="text-gray-600">{step.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const ServicesPage = () => {
+  const useCases = [
+    {
+      title: 'Small Business',
+      painPoints: [
+        'Limited marketing resources',
+        'Fragmented customer data',
+        'Manual process bottlenecks'
+      ],
+      solutions: [
+        'Streamlined marketing automation',
+        'Unified customer view',
+        'Efficient workflow design'
+      ],
+      timeline: '30-60 Days',
+      downloadLink: '#'
+    },
+    {
+      title: 'Mid-Market',
+      painPoints: [
+        'Complex sales processes',
+        'Inconsistent customer experience',
+        'Scaling challenges'
+      ],
+      solutions: [
+        'Advanced pipeline management',
+        'Integrated service workflows',
+        'Scalable automation'
+      ],
+      timeline: '60-90 Days',
+      downloadLink: '#'
+    },
+    {
+      title: 'Enterprise',
+      painPoints: [
+        'Multi-team coordination',
+        'Global reporting complexity',
+        'Advanced integration needs'
+      ],
+      solutions: [
+        'Cross-business unit architecture',
+        'Custom API integrations',
+        'AI-powered analytics'
+      ],
+      timeline: '90-120 Days',
+      downloadLink: '#'
+    }
+  ];
+
+  return (
+    <div className="min-h-screen bg-gray-100">
+      {/* Hero Section */}
+      <div className="bg-blue-600 text-white text-center py-20 px-4">
+        <h1 className="text-4xl font-extrabold mb-4">Your HubSpot Happiness Engineers</h1>
+        <p className="text-xl mb-6">Guaranteed Implementation Success</p>
+        <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-bold hover:bg-gray-100">
+          Get Free Audit
+        </button>
+      </div>
+
+      {/* Use Cases Section */}
+      <div className="max-w-6xl mx-auto py-16 px-4">
+        <h2 className="text-3xl font-bold text-center mb-12">Tailored Solutions for Every Business</h2>
+        <div className="grid md:grid-cols-3 gap-8">
+          {useCases.map((useCase, index) => (
+            <UseCaseCard key={index} {...useCase} />
+          ))}
+        </div>
+      </div>
+
+      {/* Implementation Timeline */}
+      <div className="max-w-6xl mx-auto py-16 px-4">
+        <ImplementationTimeline />
+      </div>
+
+      {/* Partner Certifications */}
+      <div className="bg-white py-16">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="text-3xl font-bold mb-12">Certified Expertise</h2>
+          <div className="flex justify-center space-x-12">
+            <div className="flex flex-col items-center">
+              <Shield className="text-blue-600 mb-4" size={64} />
+              <span className="font-semibold text-gray-800">HubSpot Elite Partner</span>
+            </div>
+            <div className="flex flex-col items-center">
+              <Cloud className="text-orange-500 mb-4" size={64} />
+              <span className="font-semibold text-gray-800">AWS Partner</span>
+            </div>
+            <div className="flex flex-col items-center">
+              <Cloud className="text-blue-500 mb-4" size={64} />
+              <span className="font-semibold text-gray-800">Azure Certified</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Contact Section */}
+      <div className="bg-gray-100 py-16">
+        <div className="max-w-2xl mx-auto text-center">
+          <h2 className="text-3xl font-bold mb-6">Ready to Transform Your Business?</h2>
+          <p className="text-xl text-gray-600 mb-8">Book a consultation or explore our support options</p>
+          <div className="flex justify-center space-x-6">
+            <button className="bg-blue-600 text-white px-8 py-3 rounded-lg font-bold hover:bg-blue-700">
+              Book Consultation
+            </button>
+            <button className="bg-white border border-blue-600 text-blue-600 px-8 py-3 rounded-lg font-bold hover:bg-blue-50">
+              Support Options
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ServicesPage;
